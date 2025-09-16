@@ -1,0 +1,6 @@
+{
+  "linters": {
+    "typescript": true,
+    "eslint": true
+  }
+}
