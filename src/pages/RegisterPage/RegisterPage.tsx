@@ -1,66 +1,72 @@
 import type React from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { InputField } from "../../conponents/InputField/InputField";
+import Button from "../../conponents/Button/Button";
+
+export type FormData = {
+	name: string;
+	email: string;
+	password: string;
+};
+
+const registerSchema = z.object({
+	name: z.string().min(1, "Name is required"),
+	email: z.string().refine((val) => /\S+@\S+\.\S+/.test(val), {
+		message: "Invalid email address",
+	}),
+	password: z.string().min(6, "Password must be at least 6 characters"),
+});
 
 export const RegisterPage: React.FC = () => {
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<FormData>({
+		resolver: zodResolver(registerSchema),
+		mode: "onChange",
+	});
+
+	const onSubmit: SubmitHandler<FormData> = (data) => {
+		console.log(data);
+		window.alert("Registration successful");
+	};
+
 	return (
 		<div className="max-w-md mx-auto p-4">
 			<h2 className="text-2xl font-bold mb-6">Register</h2>
-			<form className="space-y-4">
-				<div>
-					<label htmlFor="name" className="block">
-						Name
-					</label>
-					<input
-						type="text"
-						name="name"
-						className="w-full p-2 border rounded"
-						placeholder="Enter your name"
-					/>
-				</div>
-				<div>
-					<label htmlFor="email" className="block">
-						Email
-					</label>
-					<input
-						type="email"
-						name="email"
-						className="w-full p-2 border rounded"
-						placeholder="Enter your email"
-					/>
-				</div>
-				<div>
-					<label htmlFor="password" className="block">
-						Password
-					</label>
-					<input
-						type="password"
-						name="password"
-						className="w-full p-2 border rounded"
-						placeholder="Enter your password"
-					/>
-				</div>
-				<div>
-					<label htmlFor="confirmPassword" className="block">
-						Confirm Password
-					</label>
-					<input
-						type="password"
-						name="confirmPassword"
-						className="w-full p-2 border rounded"
-						placeholder="Confirm your password"
-					/>
-				</div>
-				<button
-					type="submit"
-					onClick={(e) => {
-						e.preventDefault();
-						window.alert("Submit");
-						return;
-					}}
-					className="w-full bg-blue-500 text-black py-2 rounded"
-				>
-					Register
-				</button>
+			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+				<InputField
+					name="name"
+					label="Name"
+					control={control}
+					placeholder="Enter your name"
+					error={errors.name?.message}
+				/>
+
+				<InputField
+					name="email"
+					label="Email"
+					control={control}
+					type="email"
+					placeholder="Enter your email"
+					error={errors.email?.message}
+				/>
+
+				<InputField
+					name="password"
+					label="Password"
+					control={control}
+					type="password"
+					placeholder="Enter your password"
+					error={errors.password?.message}
+				/>
+
+				<Button type="submit">Register</Button>
 			</form>
+
 			<div className="mt-4 text-center">
 				<p>
 					Already have an account?{" "}
