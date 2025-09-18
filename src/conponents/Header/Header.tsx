@@ -12,19 +12,19 @@ export const Header = () => {
 						</Link>
 						<Link
 							to="/login"
-							className="text-light-text dark:text-dark-text text-inherit"
+							className="text-inherit"
 						>
 							Login
 						</Link>
 						<Link
 							to="/register"
-							className="text-light-text dark:text-dark-text text-inherit"
+							className="text-inherit"
 						>
 							Register
 						</Link>
 						<Link
 							to="/"
-							className="text-light-text dark:text-dark-text text-inherit"
+							className="text-inherit"
 						>
 							News Feed
 						</Link>
