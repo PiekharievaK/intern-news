@@ -35,9 +35,12 @@ export const RegisterPage: React.FC = () => {
 	};
 
 	return (
-		<div className="max-w-md mx-auto p-4">
+		<div className="max-w-md mx-auto p-4 text-[var(--text)]">
 			<h2 className="text-2xl font-bold mb-6">Register</h2>
-			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="space-y-4  text-[var(--text)]"
+			>
 				<InputField
 					name="name"
 					label="Name"
@@ -64,13 +67,15 @@ export const RegisterPage: React.FC = () => {
 					error={errors.password?.message}
 				/>
 
-				<Button type="submit">Register</Button>
+				<Button type="submit" className="w-full">
+					Register
+				</Button>
 			</form>
 
 			<div className="mt-4 text-center">
 				<p>
 					Already have an account?{" "}
-					<a href="/login" className="text-blue-500">
+					<a href="/login" className="text-[var(--header)]">
 						Login here
 					</a>
 				</p>

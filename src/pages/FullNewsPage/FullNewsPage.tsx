@@ -25,7 +25,7 @@ const FullNewsPage: React.FC = () => {
 	if (!news) return <div>Loading...</div>;
 
 	return (
-		<div className="p-4">
+		<div className="p-4 text-[var(--text)]">
 			<h2 className="text-2xl font-bold mb-6">{news.title}</h2>
 			<p>{news.body}</p>
 		</div>

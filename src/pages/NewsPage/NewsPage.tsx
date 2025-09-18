@@ -25,10 +25,13 @@ export const NewsPage: React.FC = () => {
 			<h2 className="text-2xl font-bold mb-6">News Feed</h2>
 			<div className="space-y-4">
 				{news.map((item) => (
-					<div key={item.id} className="p-4 border rounded">
+					<div
+						key={item.id}
+						className="p-4 border rounded bg-[var(--items-bg)] text-[var(--items-t)]"
+					>
 						<h3 className="text-xl font-semibold">{item.title}</h3>
 						<p>{item.body}</p>
-						<Link to={`/news/${item.id}`} className="text-blue-500">
+						<Link to={`/news/${item.id}`} className="text-[var(--header)]">
 							Read more
 						</Link>
 					</div>

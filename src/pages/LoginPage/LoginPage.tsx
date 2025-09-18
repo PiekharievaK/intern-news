@@ -11,7 +11,12 @@ export type FormData = {
 };
 
 const loginSchema = z.object({
-	email: z.string().min(1, "Email is required").email("Invalid email address"),
+	email: z
+		.string()
+		.min(1, "Email is required")
+		.refine((val) => /\S+@\S+\.\S+/.test(val), {
+			message: "Invalid email address",
+		}),
 	password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
@@ -22,7 +27,7 @@ export const LoginPage: React.FC = () => {
 		formState: { errors },
 	} = useForm<FormData>({
 		resolver: zodResolver(loginSchema),
-		mode: "onBlur",
+		mode: "onChange",
 	});
 
 	const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -31,9 +36,12 @@ export const LoginPage: React.FC = () => {
 	};
 
 	return (
-		<div className="max-w-md mx-auto p-4">
+		<div className="max-w-md mx-auto p-4 text-[var(--text)]">
 			<h2 className="text-2xl font-bold mb-6">Login</h2>
-			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="space-y-4 text-[var(--text)]"
+			>
 				<InputField
 					name="email"
 					label="Email"
@@ -52,7 +60,7 @@ export const LoginPage: React.FC = () => {
 					error={errors.password?.message}
 				/>
 
-				<Button type="submit" className="w-full bg-blue-500 text-black">
+				<Button type="submit" className="w-full ">
 					Login
 				</Button>
 			</form>
@@ -60,7 +68,7 @@ export const LoginPage: React.FC = () => {
 			<div className="mt-4 text-center">
 				<p>
 					Don't have an account?{" "}
-					<a href="/register" className="text-blue-500">
+					<a href="/register" className="text-[var(--header)]">
 						Register here
 					</a>
 				</p>
