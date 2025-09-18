@@ -28,8 +28,8 @@ export const InputField = <T extends FieldValues>({
 	});
 
 	return (
-		<div className="mb-4">
-			<label htmlFor={name} className="block text-sm font-medium text-gray-700">
+		<div className="mb-4 ">
+			<label htmlFor={name} className="block text-sm font-medium ">
 				{label}
 			</label>
 			<input
@@ -39,7 +39,9 @@ export const InputField = <T extends FieldValues>({
 				placeholder={placeholder}
 				className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
 			/>
-			{error && <span className="text-red-500 text-sm">{error}</span>}
+			{error && (
+				<span className="text-[var(--error-text)] text-sm">{error}</span>
+			)}
 		</div>
 	);
 };
