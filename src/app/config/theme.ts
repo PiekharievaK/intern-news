@@ -1,3 +1,12 @@
-const defaultTheme = localStorage.getItem("theme") || "light";
+const defaultTheme = localStorage.getItem("theme");
 
-document.documentElement.className = defaultTheme;
+if (defaultTheme) {
+  document.documentElement.className = defaultTheme;
+} else {
+  const systemPrefersDark = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
+  const systemTheme = systemPrefersDark ? "dark" : "light";
+  localStorage.setItem("theme", systemTheme);
+  document.documentElement.className = systemTheme;
+}
