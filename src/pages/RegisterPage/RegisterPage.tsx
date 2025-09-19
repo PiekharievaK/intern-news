@@ -19,7 +19,7 @@ const registerSchema = z.object({
 	password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-export const RegisterPage: React.FC = () => {
+const RegisterPage: React.FC = () => {
 	const {
 		control,
 		handleSubmit,
@@ -83,3 +83,5 @@ export const RegisterPage: React.FC = () => {
 		</div>
 	);
 };
+
+export default RegisterPage;

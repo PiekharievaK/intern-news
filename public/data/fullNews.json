@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "News 1",
+    "content": "Full content for news 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores consequatur error dolores. Sapiente at assumenda architecto, voluptas ducimus commodi possimus provident reprehenderit cum dolorum, quos ab placeat nihil, eius optio."
+  },
+  {
+    "id": 2,
+    "title": "News 2",
+    "content": "Sint quisquam veniam repudiandae ratione pariatur! Dolore ullam doloremque autem quas nobis odio qui cum, perferendis laboriosam obcaecati ex sint voluptates possimus harum consequatur numquam repellendus, unde necessitatibus at distinctio aspernatur corrupti. Eligendi animi tempore placeat non quas atque esse suscipit perspiciatis? Officiis, provident. Eum minima reiciendis voluptas tempora repudiandae, perspiciatis totam voluptates saepe quod veritatis architecto doloribus quas pariatur nam aspernatur! Ducimus officia illum necessitatibus. Sed a eum placeat voluptates quasi numquam exercitationem inventore rerum voluptate consectetur quibusdam doloremque et maiores, aut itaque ut beatae architecto necessitatibus saepe iusto incidunt? Reiciendis rem ea ex at! Voluptatibus dolorum sit earum optio, neque mollitia ad ex nulla autem? Soluta similique odit officiis voluptates totam!"
+  },
+  {
+    "id": 3,
+    "title": "News 3",
+    "content": "Full content for news 3 Molestias placeat autem repellat, iure itaque nisi voluptatum cumque, eveniet qui possimus sunt dolorum, harum odit omnis eum nemo in? Dolor, quidem omnis. Et eveniet doloribus perspiciatis quidem ex quasi?"
+  }
+]
