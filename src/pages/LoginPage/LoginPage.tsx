@@ -20,7 +20,7 @@ const loginSchema = z.object({
 	password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-export const LoginPage: React.FC = () => {
+const LoginPage: React.FC = () => {
 	const {
 		control,
 		handleSubmit,
@@ -76,3 +76,5 @@ export const LoginPage: React.FC = () => {
 		</div>
 	);
 };
+
+export default LoginPage;

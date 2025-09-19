@@ -1,20 +1,28 @@
 import type React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
 import { Layout } from "../../conponents/Layout/Layout";
-import { NewsPage } from "../../pages/NewsPage/NewsPage";
-import { LoginPage } from "../../pages/LoginPage/LoginPage";
-import { RegisterPage } from "../../pages/RegisterPage/RegisterPage";
-import FullNewsPage from "../../pages/FullNewsPage/FullNewsPage";
+
+const NewsPage = lazy(() => import("../../pages/NewsPage/NewsPage"));
+const FullNewsPage = lazy(
+	() => import("../../pages/FullNewsPage/FullNewsPage"),
+);
+const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
+const RegisterPage = lazy(
+	() => import("../../pages/RegisterPage/RegisterPage"),
+);
 
 export const AppRoutes: React.FC = () => {
 	return (
-		<Routes>
-			<Route element={<Layout />}>
-				<Route path="/" element={<NewsPage />} />
-				<Route path="/login" element={<LoginPage />} />
-				<Route path="/register" element={<RegisterPage />} />
-				<Route path="/news/:id" element={<FullNewsPage />} />
-			</Route>
-		</Routes>
+		<Suspense fallback={<div className="p-4">Loading page...</div>}>
+			<Routes>
+				<Route element={<Layout />}>
+					<Route path="/" element={<NewsPage />} />
+					<Route path="/login" element={<LoginPage />} />
+					<Route path="/register" element={<RegisterPage />} />
+					<Route path="/news/:id" element={<FullNewsPage />} />
+				</Route>
+			</Routes>
+		</Suspense>
 	);
 };

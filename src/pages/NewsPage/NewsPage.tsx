@@ -1,42 +1,51 @@
 import type React from "react";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNews } from "../../api/getAllNews";
 
-interface News {
-	id: number;
-	title: string;
-	body: string;
-}
+const NewsPage: React.FC = () => {
+	const { data, isLoading, error } = useNews();
 
-export const NewsPage: React.FC = () => {
-	const [news, setNews] = useState<News[]>([]);
-
-	useEffect(() => {
-		const mockNews = [
-			{ id: 1, title: "News 1", body: "Content for news 1" },
-			{ id: 2, title: "News 2", body: "Content for news 2" },
-			{ id: 3, title: "News 3", body: "Content for news 3" },
-		];
-		setNews(mockNews);
-	}, []);
+	if (isLoading) return <div>loading...</div>;
+	if (error) return <div>Something went wrong</div>;
 
 	return (
 		<div className="p-4">
 			<h2 className="text-2xl font-bold mb-6">News Feed</h2>
+
 			<div className="space-y-4">
-				{news.map((item) => (
-					<div
-						key={item.id}
-						className="p-4 border rounded bg-[var(--items-bg)] text-[var(--items-t)]"
-					>
-						<h3 className="text-xl font-semibold">{item.title}</h3>
-						<p>{item.body}</p>
-						<Link to={`/news/${item.id}`} className="text-[var(--header)]">
-							Read more
-						</Link>
-					</div>
-				))}
+				{data?.map((item) => {
+					const image = item?.image || "https://i.ibb.co/hXCwYmK/4054617.png";
+
+					return (
+						<div
+							key={item.id}
+							className="flex items-start gap-4 p-4 border rounded-lg bg-[var(--items-bg)] text-[var(--items-t)] shadow-sm"
+						>
+							<div className="w-28 h-20 flex-shrink-0 overflow-hidden rounded-md bg-neutral-200 dark:bg-neutral-700">
+								<img
+									src={image}
+									alt={item.title}
+									className="w-full h-full object-contain"
+									loading="lazy"
+								/>
+							</div>
+
+							<div className="flex flex-col">
+								<h3 className="text-lg font-semibold mb-1">{item.title}</h3>
+								<p className="text-sm line-clamp-2 mb-2">{item.content}</p>
+								<Link
+									to={`/news/${item.id}`}
+									className="text-sm font-medium text-[var(--header)] hover:underline self-start"
+								>
+									Read more
+								</Link>
+							</div>
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);
 };
+
+export default NewsPage;

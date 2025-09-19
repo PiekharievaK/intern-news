@@ -10,22 +10,13 @@ export const Header = () => {
 						<Link to="/" className="text-xl font-bold text-inherit">
 							My App
 						</Link>
-						<Link
-							to="/login"
-							className="text-inherit"
-						>
+						<Link to="/login" className="text-inherit">
 							Login
 						</Link>
-						<Link
-							to="/register"
-							className="text-inherit"
-						>
+						<Link to="/register" className="text-inherit">
 							Register
 						</Link>
-						<Link
-							to="/"
-							className="text-inherit"
-						>
+						<Link to="/" className="text-inherit">
 							News Feed
 						</Link>
 					</div>
