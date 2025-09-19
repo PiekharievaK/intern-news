@@ -8,7 +8,7 @@ type NewsItem = {
 };
 
 const fetchNewsById = async (id: string): Promise<NewsItem> => {
-	const res = await fetch("/src/api/data/fullNews.json");
+	const res = await fetch("/data/fullNews.json");
 	if (!res.ok) {
 		throw new Error("Failed to fetch news");
 	}
