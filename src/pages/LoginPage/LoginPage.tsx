@@ -1,14 +1,29 @@
 import type React from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "../../conponents/InputField/InputField";
 import Button from "../../conponents/Button/Button";
+import { AppForm } from "../../conponents/Form/Form";
 
 export type FormData = {
 	email: string;
 	password: string;
 };
+
+const formFields = [
+	{
+		name: "email",
+		label: "Email",
+		type: "email",
+		placeholder: "Enter your email",
+	},
+	{
+		name: "password",
+		label: "Password",
+		type: "password",
+		placeholder: "Enter your password",
+	},
+];
 
 const loginSchema = z.object({
 	email: z
@@ -21,16 +36,7 @@ const loginSchema = z.object({
 });
 
 const LoginPage: React.FC = () => {
-	const {
-		control,
-		handleSubmit,
-		formState: { errors },
-	} = useForm<FormData>({
-		resolver: zodResolver(loginSchema),
-		mode: "onChange",
-	});
-
-	const onSubmit: SubmitHandler<FormData> = (data) => {
+	const onSubmit = (data: FormData) => {
 		console.log(data);
 		window.alert("Login successful");
 	};
@@ -38,32 +44,30 @@ const LoginPage: React.FC = () => {
 	return (
 		<div className="max-w-md mx-auto p-4 text-[var(--text)]">
 			<h2 className="text-2xl font-bold mb-6">Login</h2>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className="space-y-4 text-[var(--text)]"
+
+			<AppForm<FormData>
+				resolver={zodResolver(loginSchema)}
+				onSubmit={onSubmit}
 			>
-				<InputField
-					name="email"
-					label="Email"
-					control={control}
-					placeholder="Enter your email"
-					type="email"
-					error={errors.email?.message}
-				/>
-
-				<InputField
-					name="password"
-					label="Password"
-					control={control}
-					placeholder="Enter your password"
-					type="password"
-					error={errors.password?.message}
-				/>
-
-				<Button type="submit" className="w-full ">
-					Login
-				</Button>
-			</form>
+				{({ control, formState: { errors } }) => (
+					<>
+						{formFields.map(({ name, label, type, placeholder }) => (
+							<InputField
+								key={name}
+								name={name as keyof FormData}
+								label={label}
+								type={type}
+								placeholder={placeholder}
+								control={control}
+								error={errors[name as keyof FormData]?.message}
+							/>
+						))}
+						<Button type="submit" className="w-full">
+							Login
+						</Button>
+					</>
+				)}
+			</AppForm>
 
 			<div className="mt-4 text-center">
 				<p>
