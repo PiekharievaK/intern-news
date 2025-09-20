@@ -14,7 +14,7 @@ const RegisterPage = lazy(
 
 export const AppRoutes: React.FC = () => {
 	return (
-		<Suspense fallback={<div className="p-4">Loading page...</div>}>
+		<Suspense fallback={<div className="w-full h-full flex justify-center items-center">Loading...</div>}>
 			<Routes>
 				<Route element={<Layout />}>
 					<Route path="/" element={<NewsPage />} />
