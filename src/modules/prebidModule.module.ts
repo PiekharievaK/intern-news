@@ -21,12 +21,20 @@ type PageConfig = {
 	[key: string]: AdUnit[];
 };
 
+const importPrebidFile = () => {
+	const el = document.createElement("script");
+	el.src = "/public/prebid10.10.0.js";
+
+	document.head.appendChild(el);
+};
+
 const SIZE_SQUARE: [number, number] = [300, 250];
 const SIZE_VERTICAL: [number, number] = [300, 600];
 const SIZE_HORIZONTAL: [number, number] = [600, 300];
 
 const getAdUnitsForPage = (pageName: string): AdUnit[] => {
 	const configs: PageConfig = {
+		init: [],
 		login: [
 			{
 				code: "ad-slot-1",
@@ -66,7 +74,7 @@ const getAdUnitsForPage = (pageName: string): AdUnit[] => {
 		singleNews: [
 			{
 				code: "ad-slot-1",
-				mediaTypes: { banner: { sizes: [SIZE_SQUARE, SIZE_HORIZONTAL] } },
+				mediaTypes: { banner: { sizes: [SIZE_SQUARE] } },
 				bids: [{ bidder: "adtelligent", params: { aid: "350975" } }],
 			},
 			{
@@ -81,9 +89,9 @@ const getAdUnitsForPage = (pageName: string): AdUnit[] => {
 };
 
 const unmountAdSlots = (): void => {
-	document
-		.querySelectorAll("[data-slot^='ad-slot-']")
-		.forEach((div: any) => {div.remove()});
+	document.querySelectorAll("[data-slot^='ad-slot-']").forEach((div: any) => {
+		div.remove();
+	});
 };
 
 const renderAds = (ads: { adUnitCode: string; adId: string }[]): void => {
@@ -134,6 +142,10 @@ const initPrebid = (pageName: string): void => {
 				const ads = window.pbjs.getHighestCpmBids();
 				renderAds(ads);
 
+				// BidWon - рендер сторінки відбувається ще до того, як BidWon спрацює. Він спрацьовує після того, як ставка виграна і реклама готова до показу
+				// BidRender спрацьовує після того, як реклама була відрендерена на сторінці.Спочатку виграє і відмальовується BidWon і тільки після цього спрацьовує BidRender.
+				// getHighestCpmBids витягує найкращу пропозицію за ще до рендеру, тому робить вибір найвигіднішої ставки.
+
 				const logEvent = (type: string, data: any): void => {
 					console.log(`[PREBID EVENT] ${type}:`, data);
 					window.postMessage(
@@ -167,7 +179,7 @@ const initPrebid = (pageName: string): void => {
 		}
 	});
 };
-
-initPrebid("login");
+importPrebidFile();
+initPrebid("init");
 
 export { refreshPrebidAds, unmountAdSlots };
