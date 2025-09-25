@@ -8,13 +8,12 @@ interface Log {
 const PrebidLogsPage = () => {
 	const [logs, setLogs] = useState<Log[]>([]);
 
-	
 	useEffect(() => {
 		const addLog = (type: string, payload: any) => {
 			setLogs((prevLogs) => [...prevLogs, { type, payload }]);
 			console.log(`[PREBID][${type}]`, payload);
 		};
-		
+
 		if (window.pbjs?.onEvent) {
 			window.pbjs.onEvent("auctionInit", (data: any) =>
 				addLog("auctionInit", data),
