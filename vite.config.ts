@@ -3,7 +3,7 @@ import svgr from "vite-plugin-svgr";
 import checker from "vite-plugin-checker";
 import compression from "vite-plugin-compression";
 import { visualizer } from "rollup-plugin-visualizer";
-import virtualModules from "./src/plugins/virtual_modules.plugin";
+import virtualModules from "./src/plugins/virtual_modules.plugin.ts";
 import tailwindcss from '@tailwindcss/vite'
 import terser from "@rollup/plugin-terser";
 import react from '@vitejs/plugin-react'

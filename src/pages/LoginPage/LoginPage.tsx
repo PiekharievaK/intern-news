@@ -4,7 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "../../conponents/InputField/InputField";
 import Button from "../../conponents/Button/Button";
 import { AppForm } from "../../conponents/Form/Form";
+import { useEffect } from "react";
 
+import { refreshPrebidAds } from "../../modules/prebidModule.module.ts";
 export type FormData = {
 	email: string;
 	password: string;
@@ -36,47 +38,64 @@ const loginSchema = z.object({
 });
 
 const LoginPage: React.FC = () => {
+	useEffect(() => {
+		refreshPrebidAds("news");
+	}, []);
+
 	const onSubmit = (data: FormData) => {
 		console.log(data);
 		window.alert("Login successful");
 	};
 
 	return (
-		<div className="max-w-md mx-auto p-4 text-[var(--text)]">
-			<h2 className="text-2xl font-bold mb-6">Login</h2>
-
-			<AppForm<FormData>
-				resolver={zodResolver(loginSchema)}
-				onSubmit={onSubmit}
-			>
-				{({ control, formState: { errors } }) => (
-					<>
-						{formFields.map(({ name, label, type, placeholder }) => (
-							<InputField
-								key={name}
-								name={name as keyof FormData}
-								label={label}
-								type={type}
-								placeholder={placeholder}
-								control={control}
-								error={errors[name as keyof FormData]?.message}
-							/>
-						))}
-						<Button type="submit" className="w-full">
-							Login
-						</Button>
-					</>
-				)}
-			</AppForm>
-
-			<div className="mt-4 text-center">
-				<p>
-					Don't have an account?{" "}
-					<a href="/register" className="text-[var(--header)]">
-						Register here
-					</a>
-				</p>
+		<div className="flex w-full place-content-between  text-[var(--text)]">
+			<iframe
+				data-slot="ad-slot-1"
+				frameBorder="0"
+				scrolling="no"
+				className=" bg-[#f3f3f3] overflow-hidden border-none"
+			/>
+			<div className=" p-4">
+				{" "}
+				<h2 className="text-2xl font-bold mb-6">Login</h2>
+				<AppForm<FormData>
+					resolver={zodResolver(loginSchema)}
+					onSubmit={onSubmit}
+				>
+					{({ control, formState: { errors } }) => (
+						<>
+							{formFields.map(({ name, label, type, placeholder }) => (
+								<InputField
+									key={name}
+									name={name as keyof FormData}
+									label={label}
+									type={type}
+									placeholder={placeholder}
+									control={control}
+									error={errors[name as keyof FormData]?.message}
+								/>
+							))}
+							<Button type="submit" className="w-full">
+								Login
+							</Button>
+						</>
+					)}
+				</AppForm>
+				<div className="mt-4 text-center">
+					<p>
+						Don't have an account?{" "}
+						<a href="/register" className="text-[var(--header)]">
+							Register here
+						</a>
+					</p>
+				</div>
 			</div>
+			<iframe
+				data-slot="ad-slot-2"
+				frameBorder="0"
+				scrolling="no"
+				className="  bg-[#f3f3f3] overflow-hidden border-none"
+			/>
 		</div>
 	);
 };

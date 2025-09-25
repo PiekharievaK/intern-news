@@ -1,17 +1,26 @@
 function virtualModules() {
 	return {
 		name: "virtual-modules",
+
 		resolveId(id: string) {
 			if (id === "virtual:plugins") {
 				return id;
 			}
 			return null;
 		},
-		load(id: string) {
+
+		async load(id: string) {
 			if (id === "virtual:plugins") {
-				const modules = ["module1", "module2", "module3"];
-				return modules.map((m) => `import './src/modules/${m}.ts';`).join("\n");
+				const modules = ["prebidModule"];
+				if (modules) {
+					return modules
+						.map((item: string) => `import './src/modules/${item}.module.ts';`)
+						.join("\n");
+				}
+
+				return "console.warn('No modules found in VIRTUAL_PLUGINS');";
 			}
+
 			return null;
 		},
 	};

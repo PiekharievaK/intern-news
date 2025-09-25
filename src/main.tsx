@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./app/App";
 import "./index.css";
+import "virtual:plugins";
 
 const rootElement = document.getElementById("root") as HTMLElement | null;
 
