@@ -1,18 +1,6 @@
-import {
-	useController,
-	type Control,
-	type FieldValues,
-	type Path,
-} from "react-hook-form";
-
-interface InputProps<T extends FieldValues> {
-	name: Path<T>;
-	label: string;
-	control: Control<T>;
-	type?: string;
-	placeholder?: string;
-	error?: string;
-}
+import { useController, type FieldValues } from "react-hook-form";
+import Button from "../Button/Button";
+import type { InputProps } from "../../types/appForm";
 
 export const InputField = <T extends FieldValues>({
 	name,
@@ -21,6 +9,7 @@ export const InputField = <T extends FieldValues>({
 	type = "text",
 	placeholder,
 	error,
+	button,
 }: InputProps<T>) => {
 	const { field } = useController({
 		name,
@@ -42,6 +31,9 @@ export const InputField = <T extends FieldValues>({
 			{error && (
 				<span className="text-[var(--error-text)] text-sm">{error}</span>
 			)}
+			<Button type="submit" className="w-full">
+				{button}
+			</Button>
 		</div>
 	);
 };

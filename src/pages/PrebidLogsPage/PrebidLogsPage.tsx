@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
-
-interface Log {
-	type: string;
-	payload: any;
-}
+import type { prebidLog } from "../../types/brebid";
 
 const PrebidLogsPage = () => {
-	const [logs, setLogs] = useState<Log[]>([]);
+	const [logs, setLogs] = useState<prebidLog[]>([]);
 
-	
 	useEffect(() => {
 		const addLog = (type: string, payload: any) => {
 			setLogs((prevLogs) => [...prevLogs, { type, payload }]);
 			console.log(`[PREBID][${type}]`, payload);
 		};
-		
+
 		if (window.pbjs?.onEvent) {
 			window.pbjs.onEvent("auctionInit", (data: any) =>
 				addLog("auctionInit", data),

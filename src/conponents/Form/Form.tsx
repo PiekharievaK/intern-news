@@ -1,20 +1,5 @@
-import type React from "react";
-import {
-	useForm,
-	type SubmitHandler,
-	type UseFormProps,
-	type UseFormReturn,
-	type Resolver,
-	type FieldValues,
-} from "react-hook-form";
-
-type AppFormProps<T extends FieldValues> = {
-	onSubmit: SubmitHandler<T>;
-	children: (methods: UseFormReturn<T>) => React.ReactNode;
-	defaultValues?: UseFormProps<T>["defaultValues"];
-	className?: string;
-	resolver?: Resolver<T>;
-};
+import { useForm, type FieldValues } from "react-hook-form";
+import type { AppFormProps } from "../../types/appForm";
 
 export const AppForm = <T extends FieldValues>({
 	onSubmit,

@@ -1,50 +1,17 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { InputField } from "../../conponents/InputField/InputField";
-import Button from "../../conponents/Button/Button";
 import { AppForm } from "../../conponents/Form/Form";
 import { refreshPrebidAds } from "../../modules/prebidModule.module.ts";
 import { useEffect } from "react";
-
-export type FormData = {
-	name: string;
-	email: string;
-	password: string;
-};
-
-const formFields = [
-	{ name: "name", label: "Name", placeholder: "Enter your name", type: "text" },
-	{
-		name: "email",
-		label: "Email",
-		placeholder: "Enter your email",
-		type: "email",
-	},
-	{
-		name: "password",
-		label: "Password",
-		placeholder: "Enter your password",
-		type: "password",
-	},
-] as const;
-
-const registerSchema = z.object({
-	name: z.string().min(1, "Name is required"),
-	email: z
-		.string()
-		.min(1, "Email is required")
-		.refine((val) => /\S+@\S+\.\S+/.test(val), {
-			message: "Invalid email address",
-		}),
-	password: z.string().min(6, "Password must be at least 6 characters"),
-});
+import { registerFormFields } from "../../data/formFields.ts";
+import { rgisterResolver } from "../../schemas/registerSchema.ts";
+import type { registerFormData } from "../../types/form.ts";
 
 const RegisterPage: React.FC = () => {
 	useEffect(() => {
 		refreshPrebidAds("news");
 	}, []);
 
-	const onSubmit = (data: FormData) => {
+	const onSubmit = (data: registerFormData) => {
 		console.log(data);
 		window.alert("Registration successful");
 	};
@@ -60,13 +27,13 @@ const RegisterPage: React.FC = () => {
 			/>
 			<div>
 				<h2 className="text-2xl font-bold mb-6">Register</h2>
-				<AppForm<FormData>
+				<AppForm<registerFormData>
 					onSubmit={onSubmit}
-					resolver={zodResolver(registerSchema)}
+					resolver={rgisterResolver}
 				>
 					{({ control, formState: { errors } }) => (
 						<>
-							{formFields.map(({ name, label, placeholder, type }) => (
+							{registerFormFields.map(({ name, label, placeholder, type }) => (
 								<InputField
 									key={name}
 									name={name}
@@ -75,11 +42,9 @@ const RegisterPage: React.FC = () => {
 									placeholder={placeholder}
 									type={type}
 									error={errors[name]?.message}
+									button="Register"
 								/>
 							))}
-							<Button type="submit" className="w-full">
-								Register
-							</Button>
 						</>
 					)}
 				</AppForm>

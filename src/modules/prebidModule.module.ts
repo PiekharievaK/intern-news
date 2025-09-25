@@ -81,9 +81,9 @@ const getAdUnitsForPage = (pageName: string): AdUnit[] => {
 };
 
 const unmountAdSlots = (): void => {
-	document
-		.querySelectorAll("[data-slot^='ad-slot-']")
-		.forEach((div: any) => {div.remove()});
+	document.querySelectorAll("[data-slot^='ad-slot-']").forEach((div: any) => {
+		div.remove();
+	});
 };
 
 const renderAds = (ads: { adUnitCode: string; adId: string }[]): void => {
