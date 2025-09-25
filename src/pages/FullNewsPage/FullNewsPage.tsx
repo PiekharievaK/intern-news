@@ -1,10 +1,17 @@
 import type React from "react";
 import { useParams } from "react-router-dom";
 import { useNewsById } from "../../api/getOneNews";
+import { useEffect } from "react";
+
+import { refreshPrebidAds } from "../../modules/prebidModule.module.ts";
 
 const FullNewsPage: React.FC = () => {
 	const { id } = useParams();
 	const { data: news, isLoading, error } = useNewsById(id);
+
+	useEffect(() => {
+		refreshPrebidAds("singleNews");
+	}, []);
 
 	if (isLoading) return <div>loading...</div>;
 	if (error) return <div>Something went wrong</div>;
@@ -25,6 +32,22 @@ const FullNewsPage: React.FC = () => {
 						loading="lazy"
 					/>
 				</div>
+			</div>
+			<div className="flex">
+				<iframe
+					title="adFrame"
+					data-slot="ad-slot-1"
+					frameBorder="0"
+					scrolling="no"
+					className="  overflow-hidden border-none"
+				/>
+				<iframe
+					title="adFrame"
+					data-slot="ad-slot-2"
+					frameBorder="0"
+					scrolling="no"
+					className="  overflow-hidden border-none"
+				/>
 			</div>
 		</div>
 	);

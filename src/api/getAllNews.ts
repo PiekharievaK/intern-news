@@ -10,7 +10,6 @@ type NewsItem = {
 const getAllNews = async (): Promise<NewsItem[]> => {
 	const res = await fetch("/data/prevNews.json");
 	if (!res) throw new Error("Failed to fetch news");
-	console.log(res);
 	return res.json();
 };
 
