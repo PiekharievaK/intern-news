@@ -8,13 +8,14 @@ interface Log {
 const PrebidLogsPage = () => {
 	const [logs, setLogs] = useState<Log[]>([]);
 
-	const addLog = (type: string, payload: any) => {
-		setLogs((prevLogs) => [...prevLogs, { type, payload }]);
-		console.log(`[PREBID][${type}]`, payload);
-	};
-
+	
 	useEffect(() => {
-		if (window.pbjs && window.pbjs.onEvent) {
+		const addLog = (type: string, payload: any) => {
+			setLogs((prevLogs) => [...prevLogs, { type, payload }]);
+			console.log(`[PREBID][${type}]`, payload);
+		};
+		
+		if (window.pbjs?.onEvent) {
 			window.pbjs.onEvent("auctionInit", (data: any) =>
 				addLog("auctionInit", data),
 			);
@@ -46,9 +47,9 @@ const PrebidLogsPage = () => {
 			<h1 className="text-xl font-bold mb-4">Prebid Events Log</h1>
 
 			<ul className="list-none p-0">
-				{logs.map((log, idx) => (
+				{logs.map((log) => (
 					<li
-						key={idx}
+						key={log.type}
 						className="bg-gray-100 p-3 mb-2 font-mono rounded text-xs overflow-x-auto"
 					>
 						<details className="mt-2 pl-2">

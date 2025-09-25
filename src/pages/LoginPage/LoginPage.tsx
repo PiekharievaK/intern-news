@@ -50,6 +50,7 @@ const LoginPage: React.FC = () => {
 	return (
 		<div className="flex w-full place-content-between  text-[var(--text)]">
 			<iframe
+				title="adFrame"
 				data-slot="ad-slot-1"
 				frameBorder="0"
 				scrolling="no"
@@ -91,6 +92,7 @@ const LoginPage: React.FC = () => {
 				</div>
 			</div>
 			<iframe
+				title="adFrame"
 				data-slot="ad-slot-2"
 				frameBorder="0"
 				scrolling="no"

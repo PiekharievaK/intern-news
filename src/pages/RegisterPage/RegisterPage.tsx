@@ -52,6 +52,7 @@ const RegisterPage: React.FC = () => {
 	return (
 		<div className="text-[var(--text)] flex place-content-between ">
 			<iframe
+				title="ad-frame"
 				data-slot="ad-slot-1"
 				frameBorder="0"
 				scrolling="no"
@@ -94,6 +95,7 @@ const RegisterPage: React.FC = () => {
 			</div>
 
 			<iframe
+				title="ad-frame"
 				data-slot="ad-slot-2"
 				frameBorder="0"
 				scrolling="no"

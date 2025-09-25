@@ -18,7 +18,7 @@ const NewsPage: React.FC = () => {
 		<div className="space-y-4">
 			<div className="flex place-content-between">
 				<div className="w-[100%] mr-[50px] space-y-4">
-					{data?.map((item, index) => {
+					{data?.map((item) => {
 						const image = item?.image || "https://i.ibb.co/hXCwYmK/4054617.png";
 
 						return (
@@ -49,6 +49,7 @@ const NewsPage: React.FC = () => {
 					})}
 					<iframe
 						data-slot="ad-slot-2"
+						title="ad-frame"
 						frameBorder="0"
 						scrolling="no"
 						className="  h-[250px] overflow-hidden border-none"
@@ -56,6 +57,7 @@ const NewsPage: React.FC = () => {
 				</div>
 				<iframe
 					data-slot="ad-slot-1"
+					title="ad-frame"
 					frameBorder="0"
 					scrolling="no"
 					className=" w-[300px] overflow-hidden border-none"
