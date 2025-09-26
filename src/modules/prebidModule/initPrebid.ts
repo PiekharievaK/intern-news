@@ -5,8 +5,6 @@ export const initPrebid = (pageName: string) => {
 	window.pbjs = window.pbjs || {};
 	window.pbjs.que = window.pbjs.que || [];
 
-	console.log("init");
-
 	const loadAds = () => {
 		const adUnits = getAdUnitsForPage(pageName);
 		window.pbjs.addAdUnits(adUnits);
@@ -22,7 +20,7 @@ export const initPrebid = (pageName: string) => {
 	loadAds();
 
 	const observer = new MutationObserver((mutationsList) => {
-		for (let mutation of mutationsList) {
+		for (const mutation of mutationsList) {
 			if (mutation.type === "childList") {
 				const iframe = document.querySelector('[data-slot="ad-slot-1"]');
 				if (iframe) {
@@ -42,7 +40,7 @@ export const initPrebid = (pageName: string) => {
 		subtree: true,
 	});
 
-	const timeout = setTimeout(() => {
+	 setTimeout(() => {
 		console.log("Iframe not found in 5 seconds, stopping retries...");
 		observer.disconnect();
 	}, 5000);
