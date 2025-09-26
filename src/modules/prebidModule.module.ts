@@ -7,3 +7,4 @@ declare global {
 import { initPrebid } from "./prebidModule/initPrebid";
 
 initPrebid(window.location.pathname);
+
