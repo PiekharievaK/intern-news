@@ -1,5 +1,4 @@
 import { useController, type FieldValues } from "react-hook-form";
-import Button from "../Button/Button";
 import type { InputProps } from "../../types/appForm";
 
 export const InputField = <T extends FieldValues>({
@@ -9,7 +8,6 @@ export const InputField = <T extends FieldValues>({
 	type = "text",
 	placeholder,
 	error,
-	button,
 }: InputProps<T>) => {
 	const { field } = useController({
 		name,
@@ -31,9 +29,6 @@ export const InputField = <T extends FieldValues>({
 			{error && (
 				<span className="text-[var(--error-text)] text-sm">{error}</span>
 			)}
-			<Button type="submit" className="w-full">
-				{button}
-			</Button>
 		</div>
 	);
 };

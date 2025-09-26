@@ -1,18 +1,11 @@
 import type React from "react";
 import { InputField } from "../../conponents/InputField/InputField";
 import { AppForm } from "../../conponents/Form/Form";
-import { useEffect } from "react";
-
-import { refreshPrebidAds } from "../../modules/prebidModule.module.ts";
 import { loginFormFields } from "../../data/formFields.ts";
 import { loginResolver } from "../../schemas/loginSchema.ts";
 import type { loginFormData } from "../../types/form.ts";
 
 const LoginPage: React.FC = () => {
-	useEffect(() => {
-		refreshPrebidAds("news");
-	}, []);
-
 	const onSubmit = (data: loginFormData) => {
 		console.log(data);
 		window.alert("Login successful");
@@ -30,7 +23,11 @@ const LoginPage: React.FC = () => {
 			<div className=" p-4">
 				{" "}
 				<h2 className="text-2xl font-bold mb-6">Login</h2>
-				<AppForm<loginFormData> resolver={loginResolver} onSubmit={onSubmit}>
+				<AppForm<loginFormData>
+					resolver={loginResolver}
+					onSubmit={onSubmit}
+					button="Login"
+				>
 					{({ control, formState: { errors } }) => (
 						<>
 							{loginFormFields.map(({ name, label, type, placeholder }) => (
@@ -41,7 +38,6 @@ const LoginPage: React.FC = () => {
 									type={type}
 									placeholder={placeholder}
 									control={control}
-									button="Login"
 									error={errors[name as keyof loginFormData]?.message}
 								/>
 							))}

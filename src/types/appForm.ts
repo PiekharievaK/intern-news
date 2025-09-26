@@ -13,6 +13,7 @@ export type AppFormProps<T extends FieldValues> = {
 	children: (methods: UseFormReturn<T>) => React.ReactNode;
 	defaultValues?: UseFormProps<T>["defaultValues"];
 	className?: string;
+	button: string;
 	resolver?: Resolver<T>;
 };
 
@@ -23,5 +24,4 @@ export type InputProps<T extends FieldValues> = {
 	type?: string;
 	placeholder?: string;
 	error?: string;
-	button: string;
 };

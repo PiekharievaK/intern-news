@@ -1,16 +1,10 @@
 import { InputField } from "../../conponents/InputField/InputField";
 import { AppForm } from "../../conponents/Form/Form";
-import { refreshPrebidAds } from "../../modules/prebidModule.module.ts";
-import { useEffect } from "react";
 import { registerFormFields } from "../../data/formFields.ts";
 import { rgisterResolver } from "../../schemas/registerSchema.ts";
 import type { registerFormData } from "../../types/form.ts";
 
 const RegisterPage: React.FC = () => {
-	useEffect(() => {
-		refreshPrebidAds("news");
-	}, []);
-
 	const onSubmit = (data: registerFormData) => {
 		console.log(data);
 		window.alert("Registration successful");
@@ -30,6 +24,7 @@ const RegisterPage: React.FC = () => {
 				<AppForm<registerFormData>
 					onSubmit={onSubmit}
 					resolver={rgisterResolver}
+					button="Register"
 				>
 					{({ control, formState: { errors } }) => (
 						<>
@@ -42,7 +37,6 @@ const RegisterPage: React.FC = () => {
 									placeholder={placeholder}
 									type={type}
 									error={errors[name]?.message}
-									button="Register"
 								/>
 							))}
 						</>

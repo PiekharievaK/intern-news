@@ -1,15 +1,9 @@
 import type React from "react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNews } from "../../api/getAllNews";
-import { refreshPrebidAds } from "../../modules/prebidModule.module.ts";
 
 const NewsPage: React.FC = () => {
 	const { data, isLoading, error } = useNews();
-
-	useEffect(() => {
-		refreshPrebidAds("news");
-	}, []);
 
 	if (isLoading) return <div>loading...</div>;
 	if (error) return <div>Something went wrong</div>;

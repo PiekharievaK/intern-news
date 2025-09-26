@@ -1,17 +1,10 @@
 import type React from "react";
 import { useParams } from "react-router-dom";
 import { useNewsById } from "../../api/getOneNews";
-import { useEffect } from "react";
-
-import { refreshPrebidAds } from "../../modules/prebidModule.module.ts";
 
 const FullNewsPage: React.FC = () => {
 	const { id } = useParams();
 	const { data: news, isLoading, error } = useNewsById(id);
-
-	useEffect(() => {
-		refreshPrebidAds("singleNews");
-	}, []);
 
 	if (isLoading) return <div>loading...</div>;
 	if (error) return <div>Something went wrong</div>;
