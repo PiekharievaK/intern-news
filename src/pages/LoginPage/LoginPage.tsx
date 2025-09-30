@@ -12,16 +12,11 @@ const LoginPage: React.FC = () => {
 	};
 
 	return (
-		<div className="flex w-full place-content-between  text-[var(--text)]">
-			<iframe
-				title="adFrame"
-				data-slot="ad-slot-1"
-				frameBorder="0"
-				scrolling="no"
-				className=" bg-[#f3f3f3] overflow-hidden border-none"
-			/>
-			<div className=" p-4">
-				{" "}
+		<div
+			className="flex w-full place-content-between  text-[var(--text)]"
+			data-slot="main"
+		>
+			<div className=" mx-auto p-4">
 				<h2 className="text-2xl font-bold mb-6">Login</h2>
 				<AppForm<loginFormData>
 					resolver={loginResolver}
@@ -53,13 +48,6 @@ const LoginPage: React.FC = () => {
 					</p>
 				</div>
 			</div>
-			<iframe
-				title="adFrame"
-				data-slot="ad-slot-2"
-				frameBorder="0"
-				scrolling="no"
-				className="  bg-[#f3f3f3] overflow-hidden border-none"
-			/>
 		</div>
 	);
 };

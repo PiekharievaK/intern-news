@@ -1,6 +1,6 @@
 import type React from "react";
 import { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "../../conponents/Layout/Layout";
 
 const PrebidLogsPage = lazy(
@@ -25,12 +25,13 @@ export const AppRoutes: React.FC = () => {
 			}
 		>
 			<Routes>
-				<Route element={<Layout />}>
-					<Route path="/" element={<NewsPage />} />
-					<Route path="/login" element={<LoginPage />} />
-					<Route path="/register" element={<RegisterPage />} />
-					<Route path="/news/:id" element={<FullNewsPage />} />
-					<Route path="/prebid" element={<PrebidLogsPage />} />
+				<Route path="/" element={<Layout />}>
+					<Route index element={<Navigate to="news" replace />} />
+					<Route path="news" element={<NewsPage />} />
+					<Route path="login" element={<LoginPage />} />
+					<Route path="register" element={<RegisterPage />} />
+					<Route path="news/:id" element={<FullNewsPage />} />
+					<Route path="prebid" element={<PrebidLogsPage />} />
 				</Route>
 			</Routes>
 		</Suspense>

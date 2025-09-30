@@ -15,7 +15,9 @@ function virtualModules() {
 		async load(id) {
 			if (id === "virtual:plugins") {
 				const plugins = this.environment.config.env.VITE_VIRTUAL_PLUGINS;
-				console.log(plugins);
+				if (!plugins) {
+					return "";
+				}
 				const modules = plugins.split(",");
 
 				if (modules.length > 0) {

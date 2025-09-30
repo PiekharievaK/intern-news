@@ -3,21 +3,30 @@ export const renderAds = (
 ): void => {
 	ads.forEach((ad) => {
 		const iframe = document.querySelector(
-			`[data-slot="${ad.adUnitCode}"]`,
-		) as HTMLIFrameElement;
+			`iframe[data-slot="${ad.adUnitCode}"]`,
+		) as HTMLIFrameElement | null;
 
 		if (!iframe) {
-			console.warn(`Cannot find iframe for ${ad.adUnitCode}`);
-
+			console.warn(`Iframe not found for ${ad.adUnitCode}`);
 			return;
 		}
 
-		const doc = iframe.contentWindow?.document;
-		if (doc) {
-			doc.body.style.setProperty("margin", "0", "important");
-			if (window.pbjs) {
-				window.pbjs.renderAd(doc, ad.adId);
+		const iframeDoc = iframe.contentWindow?.document;
+
+		try {
+			if (window.pbjs?.renderAd) {
+				console.log(`Rendering ad: ${ad.adUnitCode}, adId: ${ad.adId}`);
+				window.pbjs.renderAd(iframeDoc, ad.adId);
+
+				const container = iframe.parentElement;
+				if (container) {
+					container.style.display = "block";
+				}
+			} else {
+				console.warn("pbjs.renderAd is not available");
 			}
+		} catch (err) {
+			console.error(`Error while rendering ${ad.adUnitCode}:`, err);
 		}
 	});
 };

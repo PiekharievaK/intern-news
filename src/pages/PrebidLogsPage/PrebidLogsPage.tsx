@@ -10,7 +10,6 @@ const PrebidLogsPage = () => {
 				...prevLogs.filter((item) => item.type !== type),
 				{ type, payload },
 			]);
-			console.log(`[PREBID][${type}]`, payload);
 		};
 
 		if (window.pbjs?.onEvent) {
@@ -37,29 +36,14 @@ const PrebidLogsPage = () => {
 				window.pbjs.offEvent("bidWon");
 				window.pbjs.offEvent("auctionEnd");
 			}
+			setLogs([]);
 		};
 	}, []);
 
 	return (
 		<div className="p-4 max-w-3xl mx-auto">
 			<h1 className="text-xl font-bold mb-4">Prebid Events Log</h1>
-			<div className="flex">
-				{" "}
-				<iframe
-					title="adFrame"
-					data-slot="ad-slot-1"
-					frameBorder="0"
-					scrolling="no"
-					className="  bg-[#f3f3f3] overflow-hidden border-none"
-				/>
-				<iframe
-					title="adFrame"
-					data-slot="ad-slot-2"
-					frameBorder="0"
-					scrolling="no"
-					className="  bg-[#f3f3f3] overflow-hidden border-none"
-				/>
-			</div>
+			<div className="flex" data-slot="default"></div>
 			<ul className="list-none p-0">
 				{logs.map((log) => (
 					<li

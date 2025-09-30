@@ -49,3 +49,19 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 }
+
+img {
+	width: 100%;
+	height: auto;
+}
+.resp-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.resp-iframe {
+	position: absolute;
+	top: -13px;
+	left: -13px;
+	border: 0;
+}

@@ -11,15 +11,11 @@ const RegisterPage: React.FC = () => {
 	};
 
 	return (
-		<div className="text-[var(--text)] flex place-content-between ">
-			<iframe
-				title="ad-frame"
-				data-slot="ad-slot-1"
-				frameBorder="0"
-				scrolling="no"
-				className=" bg-[#f3f3f3] overflow-hidden border-none"
-			/>
-			<div>
+		<div
+			className="text-[var(--text)] flex w-full place-content-between "
+			data-slot="main"
+		>
+			<div className="mx-auto p-4">
 				<h2 className="text-2xl font-bold mb-6">Register</h2>
 				<AppForm<registerFormData>
 					onSubmit={onSubmit}
@@ -52,14 +48,6 @@ const RegisterPage: React.FC = () => {
 					</p>
 				</div>
 			</div>
-
-			<iframe
-				title="ad-frame"
-				data-slot="ad-slot-2"
-				frameBorder="0"
-				scrolling="no"
-				className=" bg-[#f3f3f3] overflow-hidden border-none"
-			/>
 		</div>
 	);
 };

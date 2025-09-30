@@ -26,22 +26,7 @@ const FullNewsPage: React.FC = () => {
 					/>
 				</div>
 			</div>
-			<div className="flex">
-				<iframe
-					title="adFrame"
-					data-slot="ad-slot-1"
-					frameBorder="0"
-					scrolling="no"
-					className="  overflow-hidden border-none"
-				/>
-				<iframe
-					title="adFrame"
-					data-slot="ad-slot-2"
-					frameBorder="0"
-					scrolling="no"
-					className="  overflow-hidden border-none"
-				/>
-			</div>
+			<div className="flex" data-slot="main"></div>
 		</div>
 	);
 };
