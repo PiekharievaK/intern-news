@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
-
-interface Log {
-	type: string;
-	payload: any;
-}
+import type { prebidLog } from "../../types/brebid";
 
 const PrebidLogsPage = () => {
-	const [logs, setLogs] = useState<Log[]>([]);
+	const [logs, setLogs] = useState<prebidLog[]>([]);
 
 	useEffect(() => {
 		const addLog = (type: string, payload: any) => {
-			setLogs((prevLogs) => [...prevLogs, { type, payload }]);
-			console.log(`[PREBID][${type}]`, payload);
+			setLogs((prevLogs) => [
+				...prevLogs.filter((item) => item.type !== type),
+				{ type, payload },
+			]);
 		};
 
 		if (window.pbjs?.onEvent) {
@@ -38,13 +36,14 @@ const PrebidLogsPage = () => {
 				window.pbjs.offEvent("bidWon");
 				window.pbjs.offEvent("auctionEnd");
 			}
+			setLogs([]);
 		};
 	}, []);
 
 	return (
 		<div className="p-4 max-w-3xl mx-auto">
 			<h1 className="text-xl font-bold mb-4">Prebid Events Log</h1>
-
+			<div className="flex" data-slot="default"></div>
 			<ul className="list-none p-0">
 				{logs.map((log) => (
 					<li

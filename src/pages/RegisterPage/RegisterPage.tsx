@@ -1,72 +1,30 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { InputField } from "../../conponents/InputField/InputField";
-import Button from "../../conponents/Button/Button";
 import { AppForm } from "../../conponents/Form/Form";
-import { refreshPrebidAds } from "../../modules/prebidModule.module.ts";
-import { useEffect } from "react";
-
-export type FormData = {
-	name: string;
-	email: string;
-	password: string;
-};
-
-const formFields = [
-	{ name: "name", label: "Name", placeholder: "Enter your name", type: "text" },
-	{
-		name: "email",
-		label: "Email",
-		placeholder: "Enter your email",
-		type: "email",
-	},
-	{
-		name: "password",
-		label: "Password",
-		placeholder: "Enter your password",
-		type: "password",
-	},
-] as const;
-
-const registerSchema = z.object({
-	name: z.string().min(1, "Name is required"),
-	email: z
-		.string()
-		.min(1, "Email is required")
-		.refine((val) => /\S+@\S+\.\S+/.test(val), {
-			message: "Invalid email address",
-		}),
-	password: z.string().min(6, "Password must be at least 6 characters"),
-});
+import { registerFormFields } from "../../data/formFields.ts";
+import { rgisterResolver } from "../../schemas/registerSchema.ts";
+import type { registerFormData } from "../../types/form.ts";
 
 const RegisterPage: React.FC = () => {
-	useEffect(() => {
-		refreshPrebidAds("news");
-	}, []);
-
-	const onSubmit = (data: FormData) => {
+	const onSubmit = (data: registerFormData) => {
 		console.log(data);
 		window.alert("Registration successful");
 	};
 
 	return (
-		<div className="text-[var(--text)] flex place-content-between ">
-			<iframe
-				title="ad-frame"
-				data-slot="ad-slot-1"
-				frameBorder="0"
-				scrolling="no"
-				className=" bg-[#f3f3f3] overflow-hidden border-none"
-			/>
-			<div>
+		<div
+			className="text-[var(--text)] flex w-full place-content-between "
+			data-slot="main"
+		>
+			<div className="mx-auto p-4">
 				<h2 className="text-2xl font-bold mb-6">Register</h2>
-				<AppForm<FormData>
+				<AppForm<registerFormData>
 					onSubmit={onSubmit}
-					resolver={zodResolver(registerSchema)}
+					resolver={rgisterResolver}
+					button="Register"
 				>
 					{({ control, formState: { errors } }) => (
 						<>
-							{formFields.map(({ name, label, placeholder, type }) => (
+							{registerFormFields.map(({ name, label, placeholder, type }) => (
 								<InputField
 									key={name}
 									name={name}
@@ -77,9 +35,6 @@ const RegisterPage: React.FC = () => {
 									error={errors[name]?.message}
 								/>
 							))}
-							<Button type="submit" className="w-full">
-								Register
-							</Button>
 						</>
 					)}
 				</AppForm>
@@ -93,14 +48,6 @@ const RegisterPage: React.FC = () => {
 					</p>
 				</div>
 			</div>
-
-			<iframe
-				title="ad-frame"
-				data-slot="ad-slot-2"
-				frameBorder="0"
-				scrolling="no"
-				className=" bg-[#f3f3f3] overflow-hidden border-none"
-			/>
 		</div>
 	);
 };

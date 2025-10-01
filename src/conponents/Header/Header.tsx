@@ -16,8 +16,11 @@ export const Header = () => {
 						<Link to="/register" className="text-inherit">
 							Register
 						</Link>
-						<Link to="/" className="text-inherit">
+						<Link to="/news" className="text-inherit">
 							News Feed
+						</Link>
+						<Link to="/prebid" className="text-inherit">
+							Prebids Log
 						</Link>
 					</div>
 				</nav>

@@ -1,18 +1,5 @@
-import {
-	useController,
-	type Control,
-	type FieldValues,
-	type Path,
-} from "react-hook-form";
-
-interface InputProps<T extends FieldValues> {
-	name: Path<T>;
-	label: string;
-	control: Control<T>;
-	type?: string;
-	placeholder?: string;
-	error?: string;
-}
+import { useController, type FieldValues } from "react-hook-form";
+import type { InputProps } from "../../types/appForm";
 
 export const InputField = <T extends FieldValues>({
 	name,
