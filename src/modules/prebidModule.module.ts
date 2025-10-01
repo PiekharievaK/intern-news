@@ -8,7 +8,7 @@ declare global {
 
 const importPrebidFile = () => {
 	const el = document.createElement("script");
-	el.src = "/public/prebid10.10.0.js";
+	el.src = "/prebid10.10.0.js";
 
 	document.head.appendChild(el);
 };
