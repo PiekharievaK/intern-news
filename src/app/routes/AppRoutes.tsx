@@ -1,7 +1,7 @@
 import type React from "react";
 import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Layout } from "../../conponents/Layout/Layout";
+import { Layout } from "../../components/Layout/Layout";
 
 const PrebidLogsPage = lazy(
 	() => import("../../pages/PrebidLogsPage/PrebidLogsPage.tsx"),

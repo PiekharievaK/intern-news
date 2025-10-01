@@ -1,6 +1,6 @@
 import type React from "react";
-import { InputField } from "../../conponents/InputField/InputField";
-import { AppForm } from "../../conponents/Form/Form";
+import { InputField } from "../../components/InputField/InputField";
+import { AppForm } from "../../components/Form/Form";
 import { loginFormFields } from "../../data/formFields.ts";
 import { loginResolver } from "../../schemas/loginSchema.ts";
 import type { loginFormData } from "../../types/form.ts";
