@@ -7,13 +7,13 @@ type StatisticsTableProps = {
 };
 
 const StatisticsTable: React.FC<StatisticsTableProps> = ({ data, loading }) => {
-	const formatTimestamp = (timestamp: any) => {
-		const date = timestamp;
-		if (Number.isNaN(date.getTime())) {
-			return "Invalid Date";
-		}
-		return date.toLocaleString();
-	};
+	// const formatTimestamp = (timestamp: any) => {
+	// 	const date = timestamp;
+	// 	if (Number.isNaN(date.getTime())) {
+	// 		return "Invalid Date";
+	// 	}
+	// 	return date.toLocaleString();
+	// };
 
 	return (
 		<div className="border rounded-md overflow-x-auto shadow">
