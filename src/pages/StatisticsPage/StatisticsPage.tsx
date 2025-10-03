@@ -2,7 +2,7 @@ import type React from "react";
 import { useState, useEffect, useCallback } from "react";
 import { FIELD_DEFINITIONS } from "../../data/stats";
 import { Pagination } from "../../components/Pagination/Pagination";
-import StatisticsTable from "../../components/StatsTable/statsTable";
+import StatisticsTable from "../../components/StatsTable/StatsTable";
 import { saveData } from "../../api/saveData";
 
 const StatisticsPage: React.FC = () => {
