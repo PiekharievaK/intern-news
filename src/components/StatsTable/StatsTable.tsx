@@ -8,7 +8,7 @@ type StatisticsTableProps = {
 
 const StatisticsTable: React.FC<StatisticsTableProps> = ({ data, loading }) => {
 	const formatTimestamp = (timestamp: any) => {
-		const date = new Date(Number(timestamp));
+		const date = timestamp;
 		if (Number.isNaN(date.getTime())) {
 			return "Invalid Date";
 		}
@@ -55,7 +55,7 @@ const StatisticsTable: React.FC<StatisticsTableProps> = ({ data, loading }) => {
 										className="px-4 py-2 border-b"
 									>
 										{field.key === "timestamp"
-											? formatTimestamp(item[field.key])
+											? item[field.key]
 											: (item[field.key] ?? "—")}
 									</td>
 								))}

@@ -72,56 +72,32 @@ const StatisticsPage: React.FC = () => {
 			<h1 className="text-2xl font-bold mb-6">📊 Statistics</h1>
 
 			<form onSubmit={handleSubmit} className="flex flex-wrap gap-4 mb-6">
-				{FIELD_DEFINITIONS.map((field) => {
-					const value = filters[field.key] || "";
-					return (
-						<div key={field.key} className="flex flex-col">
-							<label htmlFor={field.key} className="mb-1 text-sm font-medium">
-								{field.label}
-							</label>
-							{field.type === "select" ? (
-								<select
-									id={field.key}
-									value={value}
-									onChange={(e) => handleChange(field.key, e.target.value)}
-									className="border border-gray-300 rounded px-2 py-1 text-sm"
-								>
-									<option value="">-- choose --</option>
-									{field.options?.map((option) => (
-										<option key={option} value={option}>
-											{option}
-										</option>
-									))}
-								</select>
-							) : (
-								<input
-									id={field.key}
-									type={field.type}
-									value={value}
-									onChange={(e) => handleChange(field.key, e.target.value)}
-									className="border border-gray-300 rounded px-2 py-1 text-sm"
-								/>
-							)}
-						</div>
-					);
-				})}
+  {FIELD_DEFINITIONS.filter(field => field.key === "eventType").map((field) => {
+    const value = filters[field.key] || "";
+    return (
+      <div key={field.key} className="flex flex-col">
+        <label htmlFor={field.key} className="mb-1 text-sm font-medium">
+          {field.label}
+        </label>
+        <select
+          id={field.key}
+          value={value}
+          onChange={(e) => handleChange(field.key, e.target.value)}
+          className="border border-gray-300 rounded px-2 py-1 text-sm"
+        >
+          <option value="">-- choose --</option>
+          {field.options?.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  })}
 
-				<div className="flex items-end gap-2">
-					<button
-						type="submit"
-						className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded"
-					>
-						Apply
-					</button>
-					<button
-						type="button"
-						onClick={handleReset}
-						className="bg-gray-200 hover:bg-gray-300 text-sm font-medium px-4 py-2 rounded"
-					>
-						Clear
-					</button>
-				</div>
-			</form>
+</form>
+
 
 			<div className="mb-4 space-x-2">
 				<button

@@ -65,10 +65,10 @@ function handleBeforeUnload() {
 
 function attachListeners() {
 	if (document.readyState === "complete") {
-		pushEvent("Load page", { url: location.href });
+		pushEvent("pageLoad", { url: location.href });
 	} else {
 		window.addEventListener("load", () =>
-			pushEvent("Load page", { url: location.href }),
+			pushEvent("pageLoad", { url: location.href }),
 		);
 	}
 
@@ -94,7 +94,7 @@ function attachListeners() {
 				});
 			});
 
-			pushEvent("StatsModule", { message: "pbjs.onEvent initialized" });
+			pushEvent("statsModuleLoad", { message: "pbjs.onEvent initialized" });
 		} else {
 			waited += checkInterval;
 			if (waited >= maxWaitTime) {
