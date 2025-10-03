@@ -56,12 +56,12 @@ const StatisticsPage: React.FC = () => {
 		await fetchData();
 	};
 
-	const handleReset = () => {
-		setFilters({});
-		setFilteredData([]);
-		setCurrentPage(1);
-		fetchData();
-	};
+	// const handleReset = () => {
+	// 	setFilters({});
+	// 	setFilteredData([]);
+	// 	setCurrentPage(1);
+	// 	fetchData();
+	// };
 
 	const handlePageChange = (page: number) => {
 		setCurrentPage(page);
