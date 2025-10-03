@@ -4,23 +4,23 @@ type NewsItem = {
 	id: number;
 	title: string;
 	content: string;
+	sourceUrl: string;
+	newsUrl: string;
+	createdAt: string;
+	pubDate: string;
 	image?: string;
 };
 
+const url = import.meta.env.VITE_BASE_URL;
 const fetchNewsById = async (id: string): Promise<NewsItem> => {
-	const res = await fetch("/data/fullNews.json");
+	const res = await fetch(`${url}/news/${id}`);
 	if (!res.ok) {
 		throw new Error("Failed to fetch news");
 	}
 
-	const allNews: NewsItem[] = await res.json();
-	const news = allNews.find((item) => item.id.toString() === id);
+	const fullNews: NewsItem = await res.json();
 
-	if (!news) {
-		throw new Error("News not found");
-	}
-
-	return news;
+	return fullNews;
 };
 
 export const useNewsById = (id: string | undefined) => {

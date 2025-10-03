@@ -14,6 +14,9 @@ const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
 const RegisterPage = lazy(
 	() => import("../../pages/RegisterPage/RegisterPage"),
 );
+const StatisticsPage = lazy(
+	() => import("../../pages/StatisticsPage/StatisticsPage.tsx"),
+);
 
 export const AppRoutes: React.FC = () => {
 	return (
@@ -32,6 +35,7 @@ export const AppRoutes: React.FC = () => {
 					<Route path="register" element={<RegisterPage />} />
 					<Route path="news/:id" element={<FullNewsPage />} />
 					<Route path="prebid" element={<PrebidLogsPage />} />
+					<Route path="statistics" element={<StatisticsPage />} />
 				</Route>
 			</Routes>
 		</Suspense>
