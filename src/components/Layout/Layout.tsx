@@ -2,6 +2,7 @@ import type React from "react";
 import { Footer } from "../Footer/Footer";
 import { Outlet } from "react-router-dom";
 import { Header } from "../Header/Header";
+import { ToastContainer } from "react-toastify";
 
 export const Layout: React.FC = () => {
 	return (
@@ -11,6 +12,7 @@ export const Layout: React.FC = () => {
 				<Outlet />
 			</main>
 			<Footer />
+			<ToastContainer />
 		</div>
 	);
 };

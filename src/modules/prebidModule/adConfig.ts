@@ -4,7 +4,7 @@ export const getAdConfigKeyForPage = (path: string): keyof typeof configs => {
 	if (path === "/login") return "login";
 	if (path === "/register") return "register";
 	if (path === "/news") return "news";
-	if (/^\/news\/\d+$/.test(path)) return "singleNews";
+	if (/^\/news\/[a-fA-F0-9]+$/.test(path)) return "singleNews";
 	return "default";
 };
 

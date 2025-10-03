@@ -7,15 +7,27 @@ type NewsItem = {
 	image?: string;
 };
 
-const getAllNews = async (): Promise<NewsItem[]> => {
-	const res = await fetch("/data/prevNews.json");
-	if (!res) throw new Error("Failed to fetch news");
+type PaginatedResponse = {
+	items: NewsItem[];
+	totalCount: number;
+};
+
+const url = import.meta.env.VITE_BASE_URL;
+
+export const getNews = async (page: number): Promise<PaginatedResponse> => {
+	const res = await fetch(`${url}/news${page ? `?page=${page}` : ""}`);
+
+	if (!res.ok) {
+		throw new Error("Failed to fetch paginated news");
+	}
+
 	return res.json();
 };
 
-export const useNews = () => {
+export const useNews = (page: number) => {
 	return useQuery({
-		queryKey: ["news"],
-		queryFn: getAllNews,
+		queryKey: ["news", page],
+		queryFn: () => getNews(page),
+		placeholderData: (previousData) => previousData,
 	});
 };

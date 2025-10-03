@@ -22,6 +22,9 @@ export const Header = () => {
 						<Link to="/prebid" className="text-inherit">
 							Prebids Log
 						</Link>
+						<Link to="/statistics" className="text-inherit">
+							Statistics
+						</Link>
 					</div>
 				</nav>
 				<ThemeButton />
