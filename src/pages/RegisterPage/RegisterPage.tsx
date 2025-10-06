@@ -3,11 +3,12 @@ import { AppForm } from "../../components/Form/Form";
 import { registerFormFields } from "../../data/formFields.ts";
 import { rgisterResolver } from "../../schemas/registerSchema.ts";
 import type { registerFormData } from "../../types/form.ts";
+import { useSignUp } from "../../api/signUp.ts";
 
 const RegisterPage: React.FC = () => {
+	const mutationRegister = useSignUp();
 	const onSubmit = (data: registerFormData) => {
-		console.log(data);
-		window.alert("Registration successful");
+		mutationRegister.mutate(data);
 	};
 
 	return (

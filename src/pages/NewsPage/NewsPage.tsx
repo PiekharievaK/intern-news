@@ -41,6 +41,11 @@ const NewsPage: React.FC = () => {
 								<div className="flex flex-col">
 									<h3 className="text-lg font-semibold mb-1">{item.title}</h3>
 									<p className="text-sm line-clamp-2 mb-2">{item.content}</p>
+									{item.pubDate && (
+										<p className="text-sm line-clamp-2 mb-2">
+											{new Date(item.pubDate).toLocaleString()}
+										</p>
+									)}{" "}
 									<Link
 										to={`/news/${item.id}`}
 										className="text-sm font-medium text-[var(--header)] hover:underline self-start"

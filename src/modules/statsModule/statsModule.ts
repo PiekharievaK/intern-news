@@ -41,8 +41,6 @@ function flush() {
 	const payload = JSON.stringify(eventQueue);
 	eventQueue = [];
 
-	console.log("Sending payload:", payload);
-
 	fetch(endpoint, {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },

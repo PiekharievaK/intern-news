@@ -14,7 +14,12 @@ export const loginFormFields = [
 ];
 
 export const registerFormFields = [
-	{ name: "name", label: "Name", placeholder: "Enter your name", type: "text" },
+	{
+		name: "login",
+		label: "Login",
+		placeholder: "Enter your login",
+		type: "text",
+	},
 	{
 		name: "email",
 		label: "Email",
@@ -24,6 +29,12 @@ export const registerFormFields = [
 	{
 		name: "password",
 		label: "Password",
+		placeholder: "Enter your password",
+		type: "password",
+	},
+	{
+		name: "confirmPassword",
+		label: "Confirm password",
 		placeholder: "Enter your password",
 		type: "password",
 	},
