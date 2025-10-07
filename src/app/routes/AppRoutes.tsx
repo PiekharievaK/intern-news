@@ -1,7 +1,7 @@
 import type React from "react";
 import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Layout } from "../../conponents/Layout/Layout";
+import { Layout } from "../../components/Layout/Layout";
 
 const PrebidLogsPage = lazy(
 	() => import("../../pages/PrebidLogsPage/PrebidLogsPage.tsx"),
@@ -13,6 +13,9 @@ const FullNewsPage = lazy(
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
 const RegisterPage = lazy(
 	() => import("../../pages/RegisterPage/RegisterPage"),
+);
+const StatisticsPage = lazy(
+	() => import("../../pages/StatisticsPage/StatisticsPage.tsx"),
 );
 
 export const AppRoutes: React.FC = () => {
@@ -32,6 +35,7 @@ export const AppRoutes: React.FC = () => {
 					<Route path="register" element={<RegisterPage />} />
 					<Route path="news/:id" element={<FullNewsPage />} />
 					<Route path="prebid" element={<PrebidLogsPage />} />
+					<Route path="statistics" element={<StatisticsPage />} />
 				</Route>
 			</Routes>
 		</Suspense>

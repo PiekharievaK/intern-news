@@ -1,5 +1,5 @@
-import { InputField } from "../../conponents/InputField/InputField";
-import { AppForm } from "../../conponents/Form/Form";
+import { InputField } from "../../components/InputField/InputField";
+import { AppForm } from "../../components/Form/Form";
 import { registerFormFields } from "../../data/formFields.ts";
 import { rgisterResolver } from "../../schemas/registerSchema.ts";
 import type { registerFormData } from "../../types/form.ts";
