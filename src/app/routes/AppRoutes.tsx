@@ -2,6 +2,7 @@ import type React from "react";
 import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "../../components/Layout/Layout";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.tsx";
 
 const PrebidLogsPage = lazy(
 	() => import("../../pages/PrebidLogsPage/PrebidLogsPage.tsx"),
@@ -19,6 +20,11 @@ const StatisticsPage = lazy(
 );
 
 export const AppRoutes: React.FC = () => {
+	const virtualPlugins = import.meta.env.VITE_VIRTUAL_PLUGINS;
+
+	const isStatsModuleEnabled = virtualPlugins?.includes("statsModule");
+	const isPrebidModuleEnabled = virtualPlugins?.includes("prebidModule");
+
 	return (
 		<Suspense
 			fallback={
@@ -34,8 +40,15 @@ export const AppRoutes: React.FC = () => {
 					<Route path="login" element={<LoginPage />} />
 					<Route path="register" element={<RegisterPage />} />
 					<Route path="news/:id" element={<FullNewsPage />} />
-					<Route path="prebid" element={<PrebidLogsPage />} />
-					<Route path="statistics" element={<StatisticsPage />} />
+
+					<Route element={<ProtectedRoute />}>
+						{isPrebidModuleEnabled && (
+							<Route path="prebid" element={<PrebidLogsPage />} />
+						)}
+						{isStatsModuleEnabled && (
+							<Route path="statistics" element={<StatisticsPage />} />
+						)}
+					</Route>
 				</Route>
 			</Routes>
 		</Suspense>

@@ -4,11 +4,13 @@ import { AppForm } from "../../components/Form/Form";
 import { loginFormFields } from "../../data/formFields.ts";
 import { loginResolver } from "../../schemas/loginSchema.ts";
 import type { loginFormData } from "../../types/form.ts";
+import { useLogin } from "../../api/logIn.ts";
 
 const LoginPage: React.FC = () => {
+	const loginMutation = useLogin();
+
 	const onSubmit = (data: loginFormData) => {
-		console.log(data);
-		window.alert("Login successful");
+		loginMutation.mutate(data);
 	};
 
 	return (

@@ -5,6 +5,7 @@ type NewsItem = {
 	title: string;
 	content: string;
 	image?: string;
+	pubDate?: string;
 };
 
 type PaginatedResponse = {
@@ -28,6 +29,6 @@ export const useNews = (page: number) => {
 	return useQuery({
 		queryKey: ["news", page],
 		queryFn: () => getNews(page),
-		placeholderData: (previousData) => previousData,
+		// placeholderData: (previousData) => previousData,
 	});
 };
