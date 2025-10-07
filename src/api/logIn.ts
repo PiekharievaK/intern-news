@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { fetchWithCredentials } from "./fetchWithCredentials";
 import { toast } from "react-toastify";
 import { useAuthStore } from "../store/authStore";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const url = import.meta.env.VITE_BASE_URL;
 
