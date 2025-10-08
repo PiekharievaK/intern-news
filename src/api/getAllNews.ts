@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-type NewsItem = {
+export type NewsItem = {
 	id: number;
 	title: string;
 	content: string;
@@ -29,6 +29,6 @@ export const useNews = (page: number) => {
 	return useQuery({
 		queryKey: ["news", page],
 		queryFn: () => getNews(page),
-		// placeholderData: (previousData) => previousData,
+		placeholderData: (previousData) => previousData,
 	});
 };

@@ -6,17 +6,17 @@ export const refreshPrebidAds = (): void => {
 
 	window.pbjs.que.push(() => {
 		window.pbjs.clearAuction?.();
-		window.pbjs.adUnits = [];
-
-		window.pbjs.addAdUnits(adUnits);
-
-		window.pbjs.requestBids({
-			bidsBackHandler: () => {
-				const ads = window.pbjs.getHighestCpmBids() || [];
-				console.log("Bids after refresh:", ads);
-				renderAds(ads);
-			},
-		});
+		setTimeout(() => {
+			window.pbjs.adUnits = [];
+			window.pbjs.addAdUnits(adUnits);
+			window.pbjs.requestBids({
+				bidsBackHandler: () => {
+					const ads = window.pbjs.getHighestCpmBids() || [];
+					console.log("Bids after refresh:", ads);
+					renderAds(ads);
+				},
+			});
+		}, 200);
 	});
 };
 
@@ -31,7 +31,6 @@ export const setupAdRefresh = (): NodeJS.Timeout => {
 			console.warn("No ad iframes found, skipping refresh");
 			return;
 		}
-
 		refreshPrebidAds();
 	}, 10000);
 };

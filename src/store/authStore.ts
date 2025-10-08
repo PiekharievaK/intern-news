@@ -4,8 +4,7 @@ interface AuthState {
 	isAuthenticated: boolean;
 	login: string | null;
 
-
-	setAuth: (data: { login: string ,token: string }) => void;
+	setAuth: (data: { login: string; token: string }) => void;
 	clearAuth: () => void;
 	checkAuth: () => void;
 }
@@ -27,8 +26,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 	},
 
 	checkAuth: () => {
-		const isAuthenticated =
-			!!sessionStorage.getItem("isAuthenticated");
+		const isAuthenticated = !!sessionStorage.getItem("isAuthenticated");
 		const login = sessionStorage.getItem("login");
 		set({ isAuthenticated, login });
 		console.log(isAuthenticated, login);
