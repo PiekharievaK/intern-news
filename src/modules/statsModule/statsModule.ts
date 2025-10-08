@@ -41,16 +41,16 @@ function flush() {
 	const payload = JSON.stringify(eventQueue);
 	eventQueue = [];
 
-	fetch(endpoint, {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: payload,
-		credentials: "include",
-	})
-		.then((response) => {})
-		.catch((e) => {
-			console.error("Failed to send stats:", e);
+	try {
+		fetch(endpoint, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: payload,
+			credentials: "include",
 		});
+	} catch (e) {
+		console.error("Failed to send stats:", e);
+	}
 }
 
 function handleBeforeUnload() {
