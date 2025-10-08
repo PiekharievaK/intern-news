@@ -6,28 +6,33 @@ import { useAuthStore } from "../store/authStore";
 const url = import.meta.env.VITE_BASE_URL;
 
 export const logout = async () => {
-	const res = await fetchWithCredentials(`${url}/auth/logout`, {
-		method: "GET",
-	});
+  const token = localStorage.getItem("token");
+  const res = await fetchWithCredentials(`${url}/auth/logout`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-	if (!res.ok) {
-		throw new Error();
-	}
+  if (!res.ok) {
+    throw new Error();
+  }
 
-	return res.json();
+  return res.json();
 };
 
 export const useLogout = () => {
-	const clearAuth = useAuthStore((state) => state.clearAuth);
+  const clearAuth = useAuthStore((state) => state.clearAuth);
 
-	return useMutation({
-		mutationFn: logout,
-		onSuccess: () => {
-			clearAuth();
-			toast.success("logout success:");
-		},
-		onError: (error: Error) => {
-			toast.error(`❌ logout failed ${error.message}`);
-		},
-	});
+  return useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      clearAuth();
+      toast.success("logout success:");
+    },
+    onError: (error: Error) => {
+      clearAuth();
+      toast.error(`❌ logout failed ${error.message}`);
+    },
+  });
 };

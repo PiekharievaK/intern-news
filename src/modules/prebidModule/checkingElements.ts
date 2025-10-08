@@ -11,7 +11,7 @@ export function checkingElementsOnPage({
 	onSuccess,
 	onFail = () => {},
 	interval = 100,
-	timeout = 10000,
+	timeout = 20000,
 }: CheckingOptions): void {
 	const intervalId = setInterval(() => {
 		if (action()) {
