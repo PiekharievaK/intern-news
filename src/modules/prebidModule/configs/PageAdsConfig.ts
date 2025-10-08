@@ -9,10 +9,11 @@ export const configs = {
 			anchorSelector: "default",
 			position: "append",
 		},
+
 		{
-			code: "ad-slot-2",
-			mediaTypes: { banner: { sizes: [SIZE_SQUARE] } },
-			bids: [{ bidder: "bidmatic", params: { source: 886409 } }],
+			code: "ad-slot-3",
+			mediaTypes: { banner: { sizes: [SIZE_SQUARE, SIZE_HORIZONTAL] } },
+			bids: [{ bidder: "piekharieva", params: { aid: "350975" } }],
 			anchorSelector: "default",
 			position: "append",
 		},
@@ -77,6 +78,13 @@ export const configs = {
 			code: "ad-slot-2",
 			mediaTypes: { banner: { sizes: [SIZE_SQUARE] } },
 			bids: [{ bidder: "bidmatic", params: { source: 886409 } }],
+			anchorSelector: "main",
+			position: "append",
+		},
+		{
+			code: "ad-slot-3",
+			mediaTypes: { banner: { sizes: [SIZE_SQUARE, SIZE_HORIZONTAL] } },
+			bids: [{ bidder: "piekharieva", params: { aid: "350975" } }],
 			anchorSelector: "main",
 			position: "append",
 		},

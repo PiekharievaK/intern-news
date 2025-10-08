@@ -41,14 +41,16 @@ function flush() {
 	const payload = JSON.stringify(eventQueue);
 	eventQueue = [];
 
-	fetch(endpoint, {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: payload,
-		keepalive: true,
-	}).catch((e) => {
+	try {
+		fetch(endpoint, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: payload,
+			credentials: "include",
+		});
+	} catch (e) {
 		console.error("Failed to send stats:", e);
-	});
+	}
 }
 
 function handleBeforeUnload() {
@@ -65,9 +67,9 @@ function attachListeners() {
 	if (document.readyState === "complete") {
 		pushEvent("pageLoad", { url: location.href });
 	} else {
-		window.addEventListener("load", () =>
-			pushEvent("pageLoad", { url: location.href }),
-		);
+		window.addEventListener("load", () => {
+			pushEvent("pageLoad", { url: location.href });
+		});
 	}
 
 	const pbjsEvents = [
@@ -97,7 +99,6 @@ function attachListeners() {
 			waited += checkInterval;
 			if (waited >= maxWaitTime) {
 				window.clearInterval(intervalId);
-				console.warn("pbjs.onEvent failed to initialize");
 			}
 		}
 	}, checkInterval);

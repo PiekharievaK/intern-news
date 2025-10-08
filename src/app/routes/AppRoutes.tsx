@@ -19,6 +19,10 @@ const StatisticsPage = lazy(
 	() => import("../../pages/StatisticsPage/StatisticsPage.tsx"),
 );
 
+const LineItemPage = lazy(
+	() => import("../../pages/LineItemPage/LineItemPage.tsx"),
+);
+
 export const AppRoutes: React.FC = () => {
 	const virtualPlugins = import.meta.env.VITE_VIRTUAL_PLUGINS;
 
@@ -48,6 +52,7 @@ export const AppRoutes: React.FC = () => {
 						{isStatsModuleEnabled && (
 							<Route path="statistics" element={<StatisticsPage />} />
 						)}
+						<Route path="lineItem" element={<LineItemPage />} />
 					</Route>
 				</Route>
 			</Routes>
