@@ -9,12 +9,17 @@ export const fetchStats = async (
 	filters: Filters,
 	currentPage: number,
 	pageSize: number,
+	selectedFields?: string[],
 ) => {
 	const params = new URLSearchParams({
 		...filters,
 		page: currentPage.toString(),
 		pageSize: pageSize.toString(),
 	});
+
+	if (selectedFields) {
+		params.append("selectedFields", selectedFields.join(","));
+	}
 
 	const res = await fetchWithCredentials(`${url}/stats?${params.toString()}`);
 
@@ -29,10 +34,10 @@ export const useStats = (
 	filters: Filters,
 	currentPage: number,
 	pageSize: number,
+	selectedFields?: string[],
 ) => {
 	return useQuery({
-		queryKey: ["stats", filters, currentPage, pageSize],
-		queryFn: () => fetchStats(filters, currentPage, pageSize),
-		// placeholderData: (previousData) => previousData,
+		queryKey: ["stats", filters, currentPage, pageSize, selectedFields],
+		queryFn: () => fetchStats(filters, currentPage, pageSize, selectedFields),
 	});
 };

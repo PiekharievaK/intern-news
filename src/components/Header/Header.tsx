@@ -50,6 +50,9 @@ export const Header = () => {
 										Statistics
 									</Link>
 								)}
+								<Link to="/lineItem" className="text-inherit">
+									Line Item
+								</Link>
 							</>
 						)}
 					</div>
